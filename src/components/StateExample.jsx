@@ -13,21 +13,27 @@ function StateExample() {
   // 3. 체크박스 state
   const [isChecked, setIsChecked] = useState(false)
   
-  // 4. 배열 state
-  const [items, setItems] = useState(['React', 'JavaScript', 'CSS'])
+  // 4. 배열 state (각 항목에 고유 ID 부여)
+  const [items, setItems] = useState([
+    { id: 1, text: 'React' },
+    { id: 2, text: 'JavaScript' },
+    { id: 3, text: 'CSS' }
+  ])
   const [newItem, setNewItem] = useState('')
+  const [nextId, setNextId] = useState(4)
   
   // 배열에 항목 추가
   const addItem = () => {
     if (newItem.trim() !== '') {
-      setItems([...items, newItem])
+      setItems([...items, { id: nextId, text: newItem }])
+      setNextId(nextId + 1)
       setNewItem('')
     }
   }
   
   // 배열에서 항목 제거
-  const removeItem = (index) => {
-    setItems(items.filter((_, i) => i !== index))
+  const removeItem = (id) => {
+    setItems(items.filter(item => item.id !== id))
   }
   
   return (
@@ -150,9 +156,9 @@ function StateExample() {
           </button>
         </div>
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <li 
-              key={index}
+              key={item.id}
               style={{ 
                 padding: '8px',
                 marginBottom: '5px',
@@ -163,9 +169,9 @@ function StateExample() {
                 alignItems: 'center'
               }}
             >
-              <span>{item}</span>
+              <span>{item.text}</span>
               <button 
-                onClick={() => removeItem(index)}
+                onClick={() => removeItem(item.id)}
                 style={{ 
                   padding: '4px 12px',
                   backgroundColor: '#f44336',
