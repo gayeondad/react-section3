@@ -1,14 +1,20 @@
+import { useState } from 'react';
 import Header from './components/Header/Header.jsx';
 // import componentImage from './assets/components.png';
 import CoreConcept from './components/CoreConcept.jsx';
 import { CORE_CONCEPTS } from './data.js';
 import TapButton from './components/TabButton.jsx';
 
-function handelSelect(selectedButton) {
-  console.log(`Tab "${selectedButton}" selected`);
-}
+
 
 function App() {
+  const [selectedTab, setSelectedTab] = useState('Please select a tab');
+
+  function handelSelect(selectedButton) {
+    setSelectedTab(selectedButton);
+    console.log(`Tab "${selectedTab}" selected`);
+  }
+  
   return (
     <div>
       <Header />
@@ -34,7 +40,7 @@ function App() {
             <TapButton onSelect={() => handelSelect('State')}>State</TapButton>
             <TapButton onSelect={() => handelSelect('Props')}>Props</TapButton>
           </menu>
-          Dynmic Content
+          {selectedTab}
         </section>
       </main>
     </div>
