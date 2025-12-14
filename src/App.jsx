@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Header from './components/Header/Header.jsx';
 // import componentImage from './assets/components.png';
-import CoreConcept from './components/CoreConcept.jsx';
-import { CORE_CONCEPTS, EXAMPLES } from './data.js';
+
 import TapButton from './components/TabButton.jsx';
+import CoreConcepts from './components/CoreConcepts.jsx';
 
 
 function App() {
@@ -33,14 +33,7 @@ function App() {
     <div>
       <Header />
       <main>
-        <section id="core-concepts">
-          <h2>Core Concepts</h2>
-          <ul>
-            {CORE_CONCEPTS.map((concept) => (
-              <CoreConcept key={concept.title} {...concept} />
-            ))}
-          </ul>
-        </section>
+        <CoreConcepts />
         <section id="examples">
           <h2>Examples</h2>
           <menu>
